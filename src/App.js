@@ -1,13 +1,10 @@
 import React from "react";
-import Contact from "./components/Contact";
-import users from "./components/contactsList";
+import ContactList from "./components/ContactList";
 
 function App() {
   return (
     <div>
-      {users.map(contact => (
-        <Contact key={contact.name} {...contact} />
-      ))}
+      <ContactList />
     </div>
   );
 }
