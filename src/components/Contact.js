@@ -1,23 +1,37 @@
 import React from "react";
 import "./Contact.css";
+import PropTypes from "prop-types";
 
-function Contact() {
-  return (
-    <div className="Contact">
-      <img
-        className="avatar"
-        src="https://randomuser.me/api/portraits/women/93.jpg"
-        alt="Katherine Obrien"
-      />
-      <div>
-        <p className="name">Katherine Obrien</p>
-        <div className="status">
-          <div className="status-online" />
-          <p className="status-text">online</p>
+class Contact extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {online : props.online};
+    render() {
+      return (<div className="Contact">
+        <img className="avatar" src={this.props.avatar} alt={this.props.name} />
+        <div>
+          <p className="name">{props.name}</p>
+          <div className="status">
+            <div className={this.state.online ? "status-online" : "status-offline"} />
+            <p className="status-text">
+              {this.state.online ? "status-online" : "status-offline"}
+              onClick={event => {
+                const newOnline = !this.state.online;
+                this.setState({ online: newOnline });
+              }}
+            </p>
+          </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
+      </div>);
+    };
+  };
+};
+Contact.propTypes = {
+  name: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  online: PropTypes.bool.isRequired
+};
 export default Contact;
+
+
+
